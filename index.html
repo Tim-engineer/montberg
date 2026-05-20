@@ -2,10 +2,233 @@
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <title>MONTBERG s.r.o.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONTBERG</title>
+    <style>
+        /* Definícia Apple-like systémových písiem a farieb */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1d1d1f;
+            --text-secondary: #86868b;
+            --border-color: #d2d2d7;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Automatická detekcia Dark Mode na Mac/iOS */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #000000;
+                --text-color: #f5f5f7;
+                --text-secondary: #86868b;
+                --border-color: #333336;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Minimalistická navigácia v štýle Apple */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
+            backdrop-filter: blur(20px);
+            /* Jemná priehľadnosť pre Apple efekt */
+            background-opacity: 0.8; 
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 22px;
+            height: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-status {
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #34c759; /* Apple Green */
+            border-radius: 50%;
+        }
+
+        /* Hlavná Hero sekcia s veľkým logom */
+        main {
+            flex: 1;
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 80px 22px;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 100px;
+            padding: 40px 0;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            line-height: 1.07;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        .hero p {
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: .009em;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Sekcia s informáciami (Grid layout) */
+        .grid-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-info {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .info-card {
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+        }
+
+        .info-card h2 {
+            font-size: 21px;
+            font-weight: 600;
+            letter-spacing: -0.011em;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            font-size: 17px;
+            line-height: 1.47059;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* Čistá pätička */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 30px 22px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .footer-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>MONTBERG s.r.o. - WIP</h1>
-    <p>Welcome! (Tami | Mami)</p>
+
+    <header>
+        <div class="nav-container">
+            <div class="nav-logo">MONTBERG</div>
+            <div class="nav-status">
+                <span class="status-dot"></span> Web in progress
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>MONTBERG</h1>
+            <p>Navrhujeme a vyvíjame moderné digitálne riešenia s dôrazom na detail a čistotu kódu.</p>
+        </section>
+
+        <section class="grid-info">
+            <div class="info-card">
+                <h2>O spoločnosti</h2>
+                <p>Formujeme budúcnosť mobilných a webových technológií. Našou filozofiou je minimalistický dizajn spojený s nekompromisným výkonom, inšpirovaný najvyššími dizajnovými štandardmi.</p>
+            </div>
+            
+            <div class="info-card">
+                <h2>Naše zameranie</h2>
+                <p>Špecializujeme sa na natívny vývoj aplikácií pre ekosystém Apple a moderné statické webové architektúry, ktoré prinášajú výnimočný používateľský zážitok.</p>
+            </div>
+
+            <div class="info-card">
+                <h2>Engineering</h2>
+                <p>Kód je naším remeslom. Každý riadok píšeme s ohľadom na škálovateľnosť, bezpečnosť a čistú architektúru, ktorá vydrží test časom.</p>
+            </div>
+
+            <div class="info-card">
+                <h2>Kontakt</h2>
+                <p>MONTBERG s.r.o.<br>
+                Slovenská republika<br>
+                <span style="color: var(--text-color);">info@montberg.sk</span></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>Copyright © 2026 MONTBERG s.r.o. Všetky práva vyhradené.</div>
+            <div>Designed in Bratislava</div>
+        </div>
+    </footer>
+
 </body>
 </html>
