@@ -5,23 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MONTBERG</title>
     <style>
-    /* Definícia Apple-like systémových písiem a farieb */
+    /* Definícia Apple systémových farieb a písiem (podľa HIG a apple.com) */
     :root {
-        --bg-color: #ffffff;
-        --text-color: #1d1d1f;
+        /* Light Mode */
+        --bg-body: #f5f5f7; /* Typické Apple off-white pozadie */
+        --bg-card: #ffffff;
+        --text-primary: #1d1d1f;
         --text-secondary: #86868b;
+        --nav-bg: rgba(255, 255, 255, 0.72);
         --border-color: #d2d2d7;
-        /* Prioritne načítame SF Pro, ak ho systém nemá, použije sa Inter alebo systémový bezpätkový font */
-        --font-family: "SF Pro Display", "SF Pro Text", "-apple-system", "BlinkMacSystemFont", "Inter", "Segoe UI", "Roboto", sans-serif;
+        --accent-blue: #0066cc; /* Apple Blue */
+        
+        /* Prioritne SF Pro, plynulý fallback na systémové fonty */
+        --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     /* Automatická detekcia Dark Mode na Mac/iOS */
     @media (prefers-color-scheme: dark) {
         :root {
-            --bg-color: #000000;
-            --text-color: #f5f5f7;
+            /* Dark Mode */
+            --bg-body: #000000;
+            --bg-card: #1c1c1e; /* Typická Apple tmavá sivá pre karty */
+            --text-primary: #f5f5f7;
             --text-secondary: #86868b;
-            --border-color: #333336;
+            --nav-bg: rgba(0, 0, 0, 0.72);
+            --border-color: #424245;
+            --accent-blue: #2997ff; /* Apple Blue pre dark mode */
         }
     }
 
@@ -29,14 +38,13 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        /* Aktivuje krajšie vykresľovanie a vyhladzovanie písma pre Apple displeje */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
+        background-color: var(--bg-body);
+        color: var(--text-primary);
         font-family: var(--font-family);
         display: flex;
         flex-direction: column;
@@ -44,22 +52,28 @@
         transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Minimalistická navigácia v štýle Apple */
+    /* Minimalistická navigácia - Apple štandard je 44px výška */
     header {
-        border-bottom: 1px solid var(--border-color);
         position: sticky;
         top: 0;
-        background: var(--bg-color);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px); /* Pre Safari */
+        background: var(--nav-bg);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
         z-index: 100;
+        border-bottom: 1px solid rgba(0,0,0,0.05); /* Veľmi jemný prechod */
+    }
+
+    @media (prefers-color-scheme: dark) {
+        header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
     }
 
     .nav-container {
-        max-width: 1024px;
+        max-width: 980px; /* Klasická šírka Apple kontajnerov */
         margin: 0 auto;
         padding: 0 22px;
-        height: 48px;
+        height: 44px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -68,7 +82,7 @@
     .nav-logo {
         font-weight: 600;
         font-size: 14px;
-        letter-spacing: -0.02em; /* SF Pro vyzerá skvele s mierne stiahnutým spacingom */
+        letter-spacing: -0.01em;
     }
 
     .nav-status {
@@ -81,16 +95,16 @@
     }
 
     .status-dot {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
         background-color: #34c759; /* Apple Green */
         border-radius: 50%;
     }
 
-    /* Hlavná Hero sekcia s veľkým logom */
+    /* Hlavná Hero sekcia */
     main {
         flex: 1;
-        max-width: 1024px;
+        max-width: 980px;
         margin: 0 auto;
         padding: 80px 22px;
         width: 100%;
@@ -98,94 +112,107 @@
 
     .hero {
         text-align: center;
-        margin-bottom: 100px;
-        padding: 40px 0;
+        margin-bottom: 80px;
+        padding: 20px 0;
     }
 
     .hero h1 {
-        font-size: 64px;
+        font-size: 80px; /* Ešte väčší a údernejší nadpis */
         font-weight: 700;
-        letter-spacing: -0.022em; /* Typický Apple tesný spacing na veľkých nadpisoch */
+        letter-spacing: -0.015em;
         line-height: 1.05;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
     }
 
     @media (max-width: 768px) {
         .hero h1 {
-            font-size: 44px;
+            font-size: 48px;
         }
     }
 
     .hero p {
         font-size: 24px;
         font-weight: 400;
-        letter-spacing: -0.011em;
-        line-height: 1.3;
+        letter-spacing: 0.009em;
+        line-height: 1.3334;
         color: var(--text-secondary);
-        max-width: 600px;
+        max-width: 680px;
         margin: 0 auto;
     }
 
-    /* Sekcia s informáciami (Grid layout) */
+    /* Sekcia s informáciami (Apple Card Layout) */
     .grid-info {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
+        gap: 24px; /* Tesnejší gap pre karty */
         margin-bottom: 60px;
     }
 
     @media (max-width: 768px) {
         .grid-info {
             grid-template-columns: 1fr;
-            gap: 30px;
         }
     }
 
     .info-card {
-        border-top: 1px solid var(--border-color);
-        padding-top: 24px;
+        background-color: var(--bg-card);
+        border-radius: 18px; /* Štandardný Apple radius pre menšie elementy */
+        padding: 32px;
+        transition: transform 0.3s ease;
     }
 
     .info-card h2 {
-        font-size: 22px;
+        font-size: 24px;
         font-weight: 600;
-        letter-spacing: -0.015em;
-        margin-bottom: 10px;
+        letter-spacing: -0.01em;
+        line-height: 1.16667;
+        margin-bottom: 12px;
     }
 
     .info-card p {
         font-size: 17px;
-        line-height: 1.5;
+        line-height: 1.47059;
         font-weight: 400;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.022em;
         color: var(--text-secondary);
+    }
+
+    .info-card a {
+        color: var(--accent-blue);
+        text-decoration: none;
+        font-weight: 400;
+    }
+
+    .info-card a:hover {
+        text-decoration: underline;
     }
 
     /* Čistá pätička */
     footer {
-        border-top: 1px solid var(--border-color);
         padding: 30px 22px;
         font-size: 12px;
         color: var(--text-secondary);
+        background-color: var(--bg-body);
     }
 
     .footer-container {
-        max-width: 1024px;
+        max-width: 980px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        letter-spacing: -0.01em;
+        border-top: 1px solid var(--border-color);
+        padding-top: 18px;
     }
 
     @media (max-width: 480px) {
         .footer-container {
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             text-align: center;
         }
     }
-</style>
+    </style>
 </head>
 <body>
 
@@ -224,7 +251,7 @@
                 <h2>Kontakt</h2>
                 <p>MONTBERG s.r.o.<br>
                 Slovenská republika<br>
-                <span style="color: var(--text-color);">info@montberg.sk</span></p>
+                <a href="mailto:info@montberg.sk">info@montberg.sk</a></p>
             </div>
         </section>
     </main>
