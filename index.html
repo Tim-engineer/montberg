@@ -5,37 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MONTBERG</title>
     <style>
-    /* Definícia Apple systémových farieb a písiem */
     :root {
         /* Light Mode */
-        --bg-body: #f5f5f7;
-        --bg-card: #ffffff;
+        --bg-body: #ffffff;
         --text-primary: #1d1d1f;
         --text-secondary: #86868b;
-        --nav-bg: rgba(255, 255, 255, 0.72);
+        --text-muted: #a1a1a6;
+        --nav-bg: rgba(255, 255, 255, 0.8);
         --border-color: #e5e5ea;
-        --accent-blue: #0066cc;
-        --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-        --card-hover-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-        --hero-gradient: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
+        --btn-bg: #1d1d1f;
+        --btn-text: #ffffff;
         
         --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
-    /* Automatická detekcia Dark Mode */
     @media (prefers-color-scheme: dark) {
         :root {
             /* Dark Mode */
             --bg-body: #000000;
-            --bg-card: #1c1c1e;
             --text-primary: #f5f5f7;
             --text-secondary: #86868b;
-            --nav-bg: rgba(0, 0, 0, 0.75);
-            --border-color: #2c2c2e;
-            --accent-blue: #2997ff;
-            --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-            --card-hover-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
-            --hero-gradient: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+            --text-muted: #6e6e73;
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            --border-color: #222224;
+            --btn-bg: #f5f5f7;
+            --btn-text: #000000;
         }
     }
 
@@ -54,11 +48,10 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        transition: background-color 0.4s ease, color 0.4s ease;
-        overflow-x: hidden;
+        transition: background-color 0.5s ease;
     }
 
-    /* Minimalistická navigácia */
+    /* Ultra-minimalistická navigácia */
     header {
         position: sticky;
         top: 0;
@@ -67,14 +60,13 @@
         -webkit-backdrop-filter: saturate(180%) blur(20px);
         z-index: 100;
         border-bottom: 1px solid var(--border-color);
-        transition: background 0.3s, border 0.3s;
     }
 
     .nav-container {
-        max-width: 1024px;
+        max-width: 980px;
         margin: 0 auto;
-        padding: 0 24px;
-        height: 48px;
+        padding: 0 40px;
+        height: 52px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -82,206 +74,150 @@
 
     .nav-logo {
         font-weight: 600;
-        font-size: 15px;
+        font-size: 14px;
         letter-spacing: -0.01em;
-        cursor: default;
     }
 
     .nav-status {
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 400;
         color: var(--text-secondary);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(52, 199, 89, 0.1);
-        padding: 4px 10px;
-        border-radius: 12px;
     }
 
-    .status-dot {
-        width: 6px;
-        height: 6px;
-        background-color: #34c759;
-        border-radius: 50%;
-        box-shadow: 0 0 8px #34c759;
-    }
-
-    /* Hlavná Hero sekcia */
+    /* Hlavný kontajner s veľkorysým paddingom */
     main {
         flex: 1;
-        max-width: 1024px;
+        max-width: 980px;
         margin: 0 auto;
-        padding: 100px 24px 60px 24px;
+        padding: 120px 40px;
         width: 100%;
-        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .hero {
-        text-align: center;
-        margin-bottom: 90px;
-    }
-
-    .hero h1 {
-        font-size: 86px;
+    /* Veľké úvodné vyhlásenie */
+    .intro-statement {
+        font-size: 56px;
         font-weight: 700;
-        letter-spacing: -0.025em;
-        line-height: 1.05;
-        margin-bottom: 24px;
-        background: var(--hero-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        max-width: 800px;
+        margin-bottom: 140px;
+        animation: fadeIn 1s ease-out;
     }
 
-    @media (max-width: 768px) {
-        .hero h1 {
-            font-size: 52px;
-        }
-    }
-
-    .hero p {
-        font-size: 24px;
-        font-weight: 400;
-        letter-spacing: -0.015em;
-        line-height: 1.4;
+    .intro-statement span {
         color: var(--text-secondary);
-        max-width: 640px;
-        margin: 0 auto;
     }
 
     @media (max-width: 768px) {
-        .hero p {
-            font-size: 20px;
+        .intro-statement {
+            font-size: 36px;
+            margin-bottom: 80px;
         }
     }
 
-    /* Moderný Bento Grid Layout */
-    .grid-info {
+    /* Sekcie usporiadané pod sebou (Storytelling layout) */
+    .row-section {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-        margin-bottom: 60px;
+        grid-template-columns: 80px 1fr;
+        padding: 60px 0;
+        border-top: 1px solid var(--border-color);
     }
 
-    /* Prvá a posledná karta budú širšie pre zaujímavejší rytmus */
-    .info-card.wide {
-        grid-column: span 2;
-    }
-
-    @media (max-width: 768px) {
-        .grid-info {
+    @media (max-width: 640px) {
+        .row-section {
             grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 40px 0;
         }
-        .info-card.wide {
-            grid-column: span 1;
-        }
     }
 
-    .info-card {
-        background-color: var(--bg-card);
-        border-radius: 22px;
-        padding: 40px;
-        box-shadow: var(--card-shadow);
-        border: 1px solid transparent;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                    border-color 0.4s;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
+    .section-index {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
     }
 
-    .info-card:hover {
-        transform: translateY(-4px) scale(1.01);
-        box-shadow: var(--card-hover-shadow);
-        border-color: var(--border-color);
+    .section-content {
+        max-width: 680px;
     }
 
-    .card-content h2 {
-        font-size: 24px;
+    .section-content h2 {
+        font-size: 28px;
         font-weight: 600;
         letter-spacing: -0.01em;
-        line-height: 1.2;
         margin-bottom: 16px;
     }
 
-    .info-card p {
-        font-size: 17px;
-        line-height: 1.5;
+    .section-content p {
+        font-size: 21px;
+        line-height: 1.45;
         font-weight: 400;
-        letter-spacing: -0.015em;
+        letter-spacing: -0.01em;
         color: var(--text-secondary);
     }
 
-    /* Zvýraznenie dôležitých slov na začiatku, ako to robí Apple */
-    .info-card p strong {
+    /* Zvýraznený text v odseku */
+    .section-content p em {
+        font-style: normal;
         color: var(--text-primary);
+    }
+
+    /* Apple-style kontaktné tlačidlo (Pill shape) */
+    .cta-button {
+        display: inline-block;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 24px;
+        font-size: 15px;
         font-weight: 500;
+        letter-spacing: -0.01em;
+        margin-top: 24px;
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s;
     }
 
-    .info-card .card-link {
+    .cta-button:hover {
+        transform: scale(1.03);
+        opacity: 0.9;
+    }
+
+    .address-block {
         margin-top: 32px;
-        color: var(--accent-blue);
-        text-decoration: none;
-        font-size: 17px;
-        font-weight: 400;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        transition: gap 0.2s;
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.5;
     }
 
-    .info-card:hover .card-link {
-        gap: 8px;
-    }
-
-    .info-card a.email-link {
-        color: var(--accent-blue);
-        text-decoration: none;
-    }
-    
-    .info-card a.email-link:hover {
-        text-decoration: underline;
-    }
-
-    /* Čistá pätička */
+    /* Pätička korešpondujúca s čistým dizajnom */
     footer {
-        padding: 40px 24px;
+        padding: 60px 40px 30px 40px;
         font-size: 12px;
-        color: var(--text-secondary);
-        background-color: var(--bg-body);
-        transition: background-color 0.4s;
+        color: var(--text-muted);
     }
 
     .footer-container {
-        max-width: 1024px;
+        max-width: 900px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-top: 1px solid var(--border-color);
-        padding-top: 24px;
+        padding-top: 20px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 480px) {
         .footer-container {
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             text-align: center;
         }
     }
 
-    /* Animácia na načítanie */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
     </style>
 </head>
@@ -290,53 +226,52 @@
     <header>
         <div class="nav-container">
             <div class="nav-logo">MONTBERG</div>
-            <div class="nav-status">
-                <span class="status-dot"></span> Web in progress
-            </div>
+            <div class="nav-status">Web in progress</div>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <h1>MONTBERG</h1>
-            <p>Navrhujeme a vyvíjame moderné digitálne riešenia s dôrazom na detail a čistotu kódu.</p>
+        <!-- Veľký typografický úvod -->
+        <section class="intro-statement">
+            Navrhujeme a vyvíjame moderné digitálne riešenia. <span>S dôrazom na detail, čistotu kódu a nekompromisný výkon.</span>
         </section>
 
-        <section class="grid-info">
-            <!-- Široká karta navrchu pre asymetriu a efekt -->
-            <div class="info-card wide">
-                <div class="card-content">
-                    <h2>O spoločnosti</h2>
-                    <p><strong>Formujeme budúcnosť</strong> mobilných a webových technológií. Našou filozofiou je minimalistický dizajn spojený s nekompromisným výkonom, inšpirovaný najvyššími svetovými štandardmi.</p>
-                </div>
-                <div class="card-link">Spoznajte náš prístup <span>→</span></div>
+        <!-- Príbehové sekcie pod sebou -->
+        <section class="row-section">
+            <div class="section-index">01</div>
+            <div class="section-content">
+                <h2>O spoločnosti</h2>
+                <p><em>Formujeme budúcnosť mobilných a webových technológií.</em> Našou filozofiou je sofistikovaný, minimalistický dizajn úzko prepojený s precíznym inžinierstvom, inšpirovaný najvyššími štandardmi digitálnej éry.</p>
             </div>
-            
-            <div class="info-card">
-                <div class="card-content">
-                    <h2>Naše zameranie</h2>
-                    <p><strong>Špecializujeme sa</strong> na natívny vývoj aplikácií pre ekosystém Apple a moderné statické webové architektúry, ktoré prinášajú výnimočný používateľský zážitok.</p>
-                </div>
-            </div>
+        </section>
 
-            <div class="info-card">
-                <div class="card-content">
-                    <h2>Engineering</h2>
-                    <p><strong>Kód je naším remeslom.</strong> Každý riadok píšeme s ohľadom na škálovateľnosť, nekompromisnú bezpečnosť a čistú architektúru, ktorá preverí čas.</p>
-                </div>
+        <section class="row-section">
+            <div class="section-index">02</div>
+            <div class="section-content">
+                <h2>Naše zameranie</h2>
+                <p><em>Sme špecialisti na Apple ekosystém.</em> Vytvárame natívne aplikácie s dokonalou odozvou a moderné statické webové architektúry, ktoré posúvajú používateľský zážitok na novú úroveň.</p>
             </div>
+        </section>
 
-            <div class="info-card wide">
-                <div class="card-content">
-                    <h2>Kontakt</h2>
-                    <p><strong>Dohodnite si konzultáciu.</strong> Radi s vami preberieme váš projekt a navrhneme optimálne technologické riešenie.</p>
-                    <p style="margin-top: 16px; font-size: 15px;">
-                        MONTBERG s.r.o.<br>
-                        Slovenská republika
-                    </p>
-                </div>
-                <div>
-                    <a class="card-link email-link" href="mailto:info@montberg.sk">info@montberg.sk <span>→</span></a>
+        <section class="row-section">
+            <div class="section-index">03</div>
+            <div class="section-content">
+                <h2>Engineering</h2>
+                <p><em>Kód vnímame ako remeslo.</em> Každý jeden riadok navrhujeme s ohľadom na extrémnu rýchlosť, škálovateľnosť a čistú, nadčasovú architektúru.</p>
+            </div>
+        </section>
+
+        <section class="row-section">
+            <div class="section-index">04</div>
+            <div class="section-content">
+                <h2>Kontakt</h2>
+                <p>Máte projekt, ktorý vyžaduje výnimočné technologické spracovanie? Radi ho s vami prekonzultujeme.</p>
+                
+                <a href="mailto:info@montberg.sk" class="cta-button">Napíšte nám</a>
+
+                <div class="address-block">
+                    MONTBERG s.r.o.<br>
+                    Slovenská republika
                 </div>
             </div>
         </section>
