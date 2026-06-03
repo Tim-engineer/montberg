@@ -6,31 +6,16 @@
     <title>MONTBERG</title>
     <style>
     :root {
-        /* Light Mode */
-        --bg-body: #ffffff;
-        --text-primary: #1d1d1f;
+        /* Filmová Apple čierna (Space Black / Titanium) */
+        --bg-body: #000000;
+        --bg-card: #0b0b0c;
+        --text-primary: #f5f5f7;
         --text-secondary: #86868b;
-        --text-muted: #a1a1a6;
-        --nav-bg: rgba(255, 255, 255, 0.8);
-        --border-color: #e5e5ea;
-        --btn-bg: #1d1d1f;
-        --btn-text: #ffffff;
+        --text-muted: #424245;
+        --border-color: #1d1d1f;
+        --accent-glow: linear-gradient(90deg, #ffffff, #86868b, #ffffff);
         
         --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        :root {
-            /* Dark Mode */
-            --bg-body: #000000;
-            --text-primary: #f5f5f7;
-            --text-secondary: #86868b;
-            --text-muted: #6e6e73;
-            --nav-bg: rgba(0, 0, 0, 0.8);
-            --border-color: #222224;
-            --btn-bg: #f5f5f7;
-            --btn-text: #000000;
-        }
     }
 
     * {
@@ -48,14 +33,14 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        transition: background-color 0.5s ease;
+        overflow-x: hidden;
     }
 
-    /* Ultra-minimalistická navigácia */
+    /* Transparentná prémiová navigácia */
     header {
         position: sticky;
         top: 0;
-        background: var(--nav-bg);
+        background: rgba(0, 0, 0, 0.7);
         backdrop-filter: saturate(180%) blur(20px);
         -webkit-backdrop-filter: saturate(180%) blur(20px);
         z-index: 100;
@@ -63,10 +48,10 @@
     }
 
     .nav-container {
-        max-width: 980px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 0 40px;
-        height: 52px;
+        padding: 0 24px;
+        height: 54px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -75,149 +60,213 @@
     .nav-logo {
         font-weight: 600;
         font-size: 14px;
-        letter-spacing: -0.01em;
+        letter-spacing: 0.05em;
     }
 
     .nav-status {
-        font-size: 12px;
-        font-weight: 400;
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
         color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
-    /* Hlavný kontajner s veľkorysým paddingom */
+    .status-pulse {
+        width: 6px;
+        height: 6px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    /* Hlavný Hero s masívnou typografiou */
     main {
         flex: 1;
-        max-width: 980px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 120px 40px;
+        padding: 140px 24px;
         width: 100%;
     }
 
-    /* Veľké úvodné vyhlásenie */
-    .intro-statement {
-        font-size: 56px;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-        max-width: 800px;
-        margin-bottom: 140px;
-        animation: fadeIn 1s ease-out;
+    .hero-section {
+        margin-bottom: 160px;
     }
 
-    .intro-statement span {
+    .hero-tag {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
         color: var(--text-secondary);
+        margin-bottom: 24px;
+        animation: fadeIn 1s ease-out forwards;
+    }
+
+    .hero-section h1 {
+        font-size: 96px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.0;
+        margin-bottom: 32px;
+        background: linear-gradient(180deg, #ffffff 30%, #3e3e41 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @media (max-width: 768px) {
-        .intro-statement {
-            font-size: 36px;
-            margin-bottom: 80px;
+        .hero-section h1 {
+            font-size: 56px;
         }
     }
 
-    /* Sekcie usporiadané pod sebou (Storytelling layout) */
-    .row-section {
-        display: grid;
-        grid-template-columns: 80px 1fr;
-        padding: 60px 0;
-        border-top: 1px solid var(--border-color);
-    }
-
-    @media (max-width: 640px) {
-        .row-section {
-            grid-template-columns: 1fr;
-            gap: 16px;
-            padding: 40px 0;
-        }
-    }
-
-    .section-index {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-muted);
-        font-variant-numeric: tabular-nums;
-    }
-
-    .section-content {
-        max-width: 680px;
-    }
-
-    .section-content h2 {
+    .hero-section p {
         font-size: 28px;
-        font-weight: 600;
+        font-weight: 400;
         letter-spacing: -0.01em;
+        line-height: 1.35;
+        color: var(--text-secondary);
+        max-width: 720px;
+        animation: fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section p {
+            font-size: 22px;
+        }
+    }
+
+    /* Rozvrhnutie informácií - Veľké bloky, ktoré sa vynárajú zo tmy */
+    .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        margin-bottom: 120px;
+    }
+
+    @media (max-width: 768px) {
+        .showcase-grid {
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+    }
+
+    .showcase-item {
+        border-top: 1px solid var(--border-color);
+        padding-top: 32px;
+    }
+
+    .showcase-item h2 {
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
         margin-bottom: 16px;
     }
 
-    .section-content p {
-        font-size: 21px;
-        line-height: 1.45;
+    .showcase-item p {
+        font-size: 22px;
+        line-height: 1.4;
         font-weight: 400;
-        letter-spacing: -0.01em;
         color: var(--text-secondary);
     }
 
-    /* Zvýraznený text v odseku */
-    .section-content p em {
+    .showcase-item p em {
         font-style: normal;
-        color: var(--text-primary);
+        color: #ffffff;
     }
 
-    /* Apple-style kontaktné tlačidlo (Pill shape) */
-    .cta-button {
+    /* Filmové Call to Action */
+    .cta-section {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 28px;
+        padding: 60px;
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    .cta-section h3 {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin-bottom: 16px;
+    }
+
+    .cta-section p {
+        color: var(--text-secondary);
+        font-size: 17px;
+        margin-bottom: 32px;
+    }
+
+    /* Apple Frosted Glass Button */
+    .glass-btn {
         display: inline-block;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
         text-decoration: none;
-        padding: 12px 24px;
-        border-radius: 24px;
-        font-size: 15px;
+        padding: 14px 32px;
+        border-radius: 30px;
+        font-size: 16px;
         font-weight: 500;
-        letter-spacing: -0.01em;
-        margin-top: 24px;
-        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .cta-button:hover {
-        transform: scale(1.03);
-        opacity: 0.9;
+    .glass-btn:hover {
+        background: rgba(255, 255, 255, 1);
+        color: #000000;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
     }
 
-    .address-block {
-        margin-top: 32px;
-        font-size: 14px;
+    .footer-info {
+        margin-top: 40px;
+        font-size: 13px;
         color: var(--text-muted);
-        line-height: 1.5;
+        line-height: 1.6;
     }
 
-    /* Pätička korešpondujúca s čistým dizajnom */
+    /* Elegantná tmavá pätička */
     footer {
-        padding: 60px 40px 30px 40px;
+        padding: 40px 24px;
         font-size: 12px;
         color: var(--text-muted);
+        border-top: 1px solid var(--border-color);
     }
 
     .footer-container {
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: 1px solid var(--border-color);
-        padding-top: 20px;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
         .footer-container {
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             text-align: center;
         }
     }
 
+    /* Animácie */
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; transform: translateY(40px); filter: blur(5px); }
+        to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.5; box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+        70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+        100% { transform: scale(1); opacity: 0.5; box-shadow: 0 0 0 0 rgba(255,255,255,0); }
     }
     </style>
 </head>
@@ -226,53 +275,52 @@
     <header>
         <div class="nav-container">
             <div class="nav-logo">MONTBERG</div>
-            <div class="nav-status">Web in progress</div>
+            <div class="nav-status">
+                <span class="status-pulse"></span> Web in progress
+            </div>
         </div>
     </header>
 
     <main>
-        <!-- Veľký typografický úvod -->
-        <section class="intro-statement">
-            Navrhujeme a vyvíjame moderné digitálne riešenia. <span>S dôrazom na detail, čistotu kódu a nekompromisný výkon.</span>
+        <!-- Filmový úvod -->
+        <section class="hero-section">
+            <div class="hero-tag">Prekonávame limity</div>
+            <h1>MONTBERG</h1>
+            <p>Navrhujeme a vyvíjame moderné digitálne riešenia. Sme posadnutí detailmi, čistotou kódu a nekompromisným výkonom.</p>
         </section>
 
-        <!-- Príbehové sekcie pod sebou -->
-        <section class="row-section">
-            <div class="section-index">01</div>
-            <div class="section-content">
+        <!-- Bloky prechádzajúce zo tmy -->
+        <section class="showcase-grid">
+            <div class="showcase-item">
                 <h2>O spoločnosti</h2>
-                <p><em>Formujeme budúcnosť mobilných a webových technológií.</em> Našou filozofiou je sofistikovaný, minimalistický dizajn úzko prepojený s precíznym inžinierstvom, inšpirovaný najvyššími štandardmi digitálnej éry.</p>
+                <p><em>Formujeme budúcnosť</em> mobilných a webových technológií. Spájame prísny minimalizmus s precíznym inžinierstvom.</p>
             </div>
-        </section>
-
-        <section class="row-section">
-            <div class="section-index">02</div>
-            <div class="section-content">
+            
+            <div class="showcase-item">
                 <h2>Naše zameranie</h2>
-                <p><em>Sme špecialisti na Apple ekosystém.</em> Vytvárame natívne aplikácie s dokonalou odozvou a moderné statické webové architektúry, ktoré posúvajú používateľský zážitok na novú úroveň.</p>
+                <p><em>Natívny vývoj</em> pre ekosystém Apple a moderné architektúry, ktoré prinášajú bezchybnú odozvu.</p>
             </div>
-        </section>
 
-        <section class="row-section">
-            <div class="section-index">03</div>
-            <div class="section-content">
+            <div class="showcase-item">
                 <h2>Engineering</h2>
-                <p><em>Kód vnímame ako remeslo.</em> Každý jeden riadok navrhujeme s ohľadom na extrémnu rýchlosť, škálovateľnosť a čistú, nadčasovú architektúru.</p>
+                <p><em>Kód ako remeslo.</em> Každý pixel a riadok píšeme s ohľadom na rýchlosť, bezpečnosť a nadčasovosť.</p>
+            </div>
+
+            <div class="showcase-item">
+                <h2>Filozofia</h2>
+                <p><em>Bez kompromisov.</em> Tam, kde iní vidia hotový produkt, my vidíme priestor na optimalizáciu.</p>
             </div>
         </section>
 
-        <section class="row-section">
-            <div class="section-index">04</div>
-            <div class="section-content">
-                <h2>Kontakt</h2>
-                <p>Máte projekt, ktorý vyžaduje výnimočné technologické spracovanie? Radi ho s vami prekonzultujeme.</p>
-                
-                <a href="mailto:info@montberg.sk" class="cta-button">Napíšte nám</a>
-
-                <div class="address-block">
-                    MONTBERG s.r.o.<br>
-                    Slovenská republika
-                </div>
+        <!-- Finálne prémiové CTA -->
+        <section class="cta-section">
+            <h3>Máte veľké plány?</h3>
+            <p>Poďme spolu vytvoriť niečo výnimočné.</p>
+            <a href="mailto:info@montberg.sk" class="glass-btn">Spustiť projekt</a>
+            
+            <div class="footer-info">
+                MONTBERG s.r.o.<br>
+                Slovenská republika
             </div>
         </section>
     </main>
